@@ -4,6 +4,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Wrapper, StyledButton } from './App.styles';
+import Cart from './Cart/Cart';
 import Item from './Item/Item';
 
 export type cartItemType = {
@@ -11,7 +12,7 @@ export type cartItemType = {
   category: string;
   description: string;
   image: string;
-  price: string;
+  price: number;
   title: string;
   amount: number;
 }
@@ -40,7 +41,7 @@ const App = () => {
   return (
     <Wrapper>
       <Drawer anchor="right" open={isCartOpen} onClose={() => setIsCartOpen(false)}>
-        Cart Items goes here
+        <Cart cartItems={cartItems} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart}/>
       </Drawer>
       <StyledButton onClick={() => setIsCartOpen(true)}>
         <Badge badgeContent={getTotalItems((cartItems))} color="error">
